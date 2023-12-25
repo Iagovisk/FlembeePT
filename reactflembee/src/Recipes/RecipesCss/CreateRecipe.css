@@ -1,0 +1,73 @@
+/* Estilo general para el formulario */
+.backgroundCreateRecipe{
+    background: linear-gradient(to bottom, #FFFFFF 0%, rgba(158, 171, 228, 0) 25%, rgba(158, 171, 228, 0) 80%, #FFFFFF 100%),
+    radial-gradient(circle at top left, #9eabe4, rgba(158, 171, 228, 0) 80%),
+    radial-gradient(circle at bottom right, #77eed8, rgba(119, 238, 216, 0) 80%);
+    height: 100%;   
+    min-height: 85.3vh;
+    width: 100%;
+}
+
+.compCreateRecipes {
+    background-color: #fff; /* Fondo blanco para resaltar el formulario */
+    padding: 20px; /* Espaciado interior */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0px 6px rgba(0,0,0,0.1); /* Sombra suave para dar profundidad */
+    max-width: 600px; /* Ancho máximo para el formulario */
+    margin: 40px auto; /* Centrado y espaciado desde el top y bottom */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+}
+
+/* Estilo para los títulos */
+.compCreateRecipes h3 {
+    text-align: center; /* Centrado del título */
+    color: #333; /* Color del texto */
+    margin-bottom: 30px; /* Espaciado debajo del título */
+}
+
+/* Estilo para las etiquetas de los campos */
+.compCreateRecipes label {
+    display: block; /* Hace que la etiqueta sea un bloque */
+    color: #555; /* Color oscuro para las etiquetas */
+    margin-bottom: 5px; /* Espaciado debajo de la etiqueta */
+    font-weight: bold; /* Texto en negrita */
+}
+
+/* Estilo para los campos de entrada */
+.compCreateRecipes input[type='text'],
+.compCreateRecipes input[type='number'],
+.compCreateRecipes select {
+    width: 100%; /* Ancho completo */
+    padding: 10px; /* Espaciado interior */
+    margin-bottom: 20px; /* Espaciado debajo de cada campo */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ddd; /* Borde sutil */
+}
+
+/* Estilo para los botones */
+.compCreateRecipes .btn {
+    padding: 10px 20px; /* Espaciado interior */
+    border-radius: 5px; /* Bordes redondeados */
+    margin-right: 10px; /* Espaciado entre botones */
+    cursor: pointer; /* Cursor en forma de mano */
+    font-weight: bold; /* Texto en negrita */
+}
+
+/* Estilo para el botón principal */
+.compCreateRecipes .btn-primary {
+    background-color: #007bff; /* Color azul */
+    color: white; /* Texto blanco */
+    border: none; /* Sin bordes */
+}
+
+/* Estilo para el botón de añadir categoría */
+.compCreateRecipes .btn-success {
+    background-color: #28a745; /* Color verde */
+    color: white; /* Texto blanco */
+    border: none; /* Sin bordes */
+}
+
+/* Agregar un poco de margen superior para el botón de añadir categoría */
+.compCreateRecipes .btn-success {
+    margin-top: 10px;
+}

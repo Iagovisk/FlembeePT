@@ -1,0 +1,58 @@
+.backgroundShowUsers{
+    background: linear-gradient(to bottom, #FFFFFF 0%, rgba(158, 171, 228, 0) 25%, rgba(158, 171, 228, 0) 80%, #FFFFFF 100%),
+    radial-gradient(circle at top left, #9eabe4, rgba(158, 171, 228, 0) 80%),
+    radial-gradient(circle at bottom right, #77eed8, rgba(119, 238, 216, 0) 80%);
+    height: 100%;   
+    min-height: 85.3vh;
+    width: 100%;
+    text-align: center;
+}
+
+.backgroundShowUsers h1 {
+    margin-bottom: 20px;
+}
+
+.divTabla {
+    margin: auto;
+    width: 80%;
+    border: none;
+}
+
+#encabezadoTableAlias{
+    border-top-left-radius: 20px;
+}
+
+#encabezadoTableAcciones{
+    border-top-right-radius: 20px;
+}
+
+#tdAlias{
+    border-bottom-left-radius: 20px;
+}
+
+#tdAcciones{
+    border-bottom-right-radius: 20px;
+}
+
+.table{
+    margin-top: 20px;
+    box-shadow: 0px 0px 10px rgb(105, 105, 105);
+    border-radius: 20px;
+    background-color: white;
+}
+
+.btnCrearUser {
+    float: right; 
+    margin-right: 10%; 
+    margin-bottom: 20px; 
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.btnEditarUser{
+    margin-right: 5px;
+}

@@ -1,0 +1,77 @@
+/* Estilo general para el componente */
+.backgroundMain{
+    background: linear-gradient(to bottom, #FFFFFF 0%, rgba(158, 171, 228, 0) 25%, rgba(158, 171, 228, 0) 80%, #FFFFFF 100%),
+    radial-gradient(circle at top left, #9eabe4, rgba(158, 171, 228, 0) 80%),
+    radial-gradient(circle at bottom right, #77eed8, rgba(119, 238, 216, 0) 80%);
+    height: 100%;   
+    min-height: 85.3vh;
+    width: 100%;}
+/* Estilo general para el componente */
+.backgroundDetails {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente moderna */
+    padding: 20px; /* Espaciado interior */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 20px auto; /* Centrado y espaciado desde el top */
+    background-color: #ffffff1f; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra exterior */
+}
+
+/* Estilo para el título de la receta */
+.backgroundDetails h2 {
+    background-color: #f2f2f21f; /* Fondo ligeramente gris */
+    color: #333; /* Color del texto */
+    text-align: center; /* Centrado */
+    margin: -20px -20px 30px -20px; /* Ajuste para que el título se integre con el borde */
+    padding: 20px; /* Espaciado interior */
+    border-radius: 10px 10px 0 0; /* Bordes redondeados solo en la parte superior */
+}
+
+/* Estilo para los contenedores de columnas */
+.backgroundDetails .row {
+    display: flex; /* Flexbox para disposición de columnas */
+    flex-wrap: wrap; /* Permite envolver elementos en pantallas pequeñas */
+    justify-content: space-around; /* Espaciado entre columnas */
+    margin-bottom: 20px; /* Espaciado debajo de cada fila */
+}
+
+/* Estilo para cada columna */
+.backgroundDetails .col-4 {
+    flex: 0 0 30%; /* Tamaño de las columnas */
+    max-width: 30%; /* Máximo ancho de las columnas */
+    padding: 15px; /* Espaciado interior */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra suave */
+    margin: 10px; /* Espaciado alrededor */
+    background-color: #fafafa; /* Color de fondo */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilo para los subtítulos */
+.backgroundDetails h3 {
+    color: #555; /* Color del texto */
+    margin-bottom: 15px; /* Espaciado debajo del subtítulo */
+    padding-bottom: 5px; /* Espaciado debajo del texto */
+    border-bottom: 2px solid #eaeaea; /* Línea debajo del subtítulo */
+}
+
+/* Estilo para los párrafos */
+.backgroundDetails p {
+    color: #444; /* Color del texto */
+    line-height: 1.6; /* Espaciado de línea */
+}
+
+/* Estilo para los botones */
+.backgroundDetails .btn {
+    display: block; /* Bloque para ocupar todo el ancho */
+    width: auto; /* Ancho automático */
+    padding: 10px 20px; /* Espaciado interior */
+    margin: 10px auto; /* Centrado y espaciado */
+    text-align: center; /* Texto centrado */
+    border-radius: 5px; /* Bordes redondeados para botones */
+}
+
+/* Estilo para el botón de favoritos */
+.backgroundDetails .btn-danger, .backgroundDetails .btn-primary {
+    margin-top: 20px; /* Espaciado superior */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sombra suave para botones */
+}

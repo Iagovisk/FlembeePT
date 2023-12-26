@@ -9,8 +9,9 @@ const URI = "http://localhost:8000/recipes/";
 const URI2 = "http://localhost:8000/categories/";
 
 const CompEditRecipes = () => {
-    
+        // Obtener el ID de la receta desde la URL.
         const {id} = useParams();
+        // Estados para almacenar los valores de los campos de la receta y categorías.
         const [nombre, setNombre] = useState('');
         const [descripcion, setDescripcion] = useState('');
         const [tiempo, setTiempo] = useState('');
@@ -22,9 +23,19 @@ const CompEditRecipes = () => {
         const [categoriaInput, setCategoriaInput] = useState('');
         const [descripcionCategoria, setDescripcionCategoria] = useState('');
         const [ingredientes, setIngredientes] = useState('');
+        // Hook para la navegación y contexto de autenticación.
         const navigate = useNavigate();
         const { authState } = useAuth();
 
+        // Efectos para redirigir al usuario en caso de no tener autorización.
+        useEffect(() => {
+            if (authState.administrador === '0') {
+                navigate('/');
+                return;
+            }
+        }, [authState.administrador, navigate, authState]);
+
+        // Efecto para redirigir al usuario en caso de no estar autenticado.
         useEffect(() => {
             if (!authState.isAuthenticated) {
                 navigate('/');
@@ -32,6 +43,7 @@ const CompEditRecipes = () => {
             }
         }, [authState.isAuthenticated, navigate]);
     
+        //Efecto para cargar categorias al montar el componente
         useEffect( ()=>{
             getCategories()
         },[])
@@ -116,10 +128,12 @@ const CompEditRecipes = () => {
             }
         }
 
+        //Procedimiento para añadir categoria
         const añadirCategoria = () => {
             setMostrarSelect(!mostrarSelect);
         }
     
+        //Efecto para cargar receta al montar el componente
         useEffect( ()=>{
             const getRecipeById = async () => {
                 const res = await axios.get(URI+id);
@@ -135,6 +149,7 @@ const CompEditRecipes = () => {
             getRecipeById();
         },[id])
 
+        //Efecto para cargar categoria al montar el componente
         useEffect( ()=>{
             const getCategoriaById = async () => {
                 const res = await axios.get(URI2+selectedCategoria);

@@ -9,14 +9,25 @@ const URI = "http://localhost:8000/users/";
 
 const CompEditUsers = () => {
 
+    
     const {id} = useParams();
     const [alias, setAlias] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [administrador, setAdministrador] = useState('');
+    // Hook para la navegación y contexto de autenticación.
     const navigate = useNavigate();
     const { authState } = useAuth();
 
+    // Efectos para redirigir al usuario en caso de no tener autorización.
+    useEffect(() => {
+        if (authState.administrador === '0') {
+            navigate('/');
+            return;
+        }
+    }, [authState.administrador, navigate, authState]);
+
+    //Efectos para redirigir al usuario en caso de no estar autenticado.
     useEffect(() => {
         if (!authState.isAuthenticated) {
             navigate('/');
@@ -56,6 +67,7 @@ const CompEditUsers = () => {
         })
     }
 
+    //Obtener usuario por id
     useEffect( ()=>{
         const getUserById = async () => {
             const res = await axios.get(URI+id);
@@ -75,19 +87,19 @@ const CompEditUsers = () => {
                 <form onSubmit={update}>
                     <div className="mb-3">
                         <label>Alias</label>
-                        <input type="text" className="form-control" onChange={(e)=>setAlias(e.target.value)} value={alias}/>
+                        <input type="text" className="form-control" onChange={(e)=>setAlias(e.target.value)} value={alias} required/>
                     </div>
                     <div className="mb-3">
                         <label>Email</label>
-                        <input type="text" className="form-control" onChange={(e)=>setEmail(e.target.value)} value={email}/>
+                        <input type="text" className="form-control" onChange={(e)=>setEmail(e.target.value)} value={email} required/>
                     </div>
                     <div className="mb-3">
                         <label>Contraseña</label>
-                        <input type="password" className="form-control" onChange={(e)=>setPassword(e.target.value)} value={password}/>
+                        <input type="password" className="form-control" onChange={(e)=>setPassword(e.target.value)} value={password} required/>
                     </div>
                     <div className="mb-3">
                         <label>Administrador</label>
-                        <select className="form-control" onChange={(e)=>{setAdministrador(e.target.value)}} value={administrador.toString()}>
+                        <select className="form-control" onChange={(e)=>{setAdministrador(e.target.value)}} value={administrador.toString()} required>
                             <option value="1">Si</option>
                             <option value="0">No</option>
                         </select>

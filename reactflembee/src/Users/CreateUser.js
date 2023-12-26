@@ -8,14 +8,24 @@ import './UsersCss/CreateUser.css';
 const URI = "http://localhost:8000/users/";
 
 const CompCreateUser = () => {
-
+   
     const [alias, setAlias] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [administrador, setAdministrador] = useState('');
+    // Hook para la navegación y contexto de autenticación.
     const navigate = useNavigate();
     const { authState } = useAuth();
 
+    // Efectos para redirigir al usuario en caso de no tener autorización.
+    useEffect(() => {
+        if (authState.administrador === '0') {
+            navigate('/');
+            return;
+        }
+    }, [authState.administrador, navigate, authState]);
+
+    //Efectos para redirigir al usuario en caso de no estar autenticado.
     useEffect(() => {
         if (!authState.isAuthenticated) {
             navigate('/');

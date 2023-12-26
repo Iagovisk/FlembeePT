@@ -11,9 +11,11 @@ const CompShowPersonalRecipes = () => {
 
     const {id} = useParams();
     const [recetas, setRecetas] = useState([]);
+    // Hook para la navegación y contexto de autenticación.
     const { authState } = useAuth();
     const navigate = useNavigate();
 
+    // Efectos para redirigir al usuario en caso de no estar autenticado.
     useEffect(() => {
         if (!authState.isAuthenticated) {
             navigate('/');

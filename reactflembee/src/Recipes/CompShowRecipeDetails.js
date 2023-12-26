@@ -8,8 +8,10 @@ const URI = "http://localhost:8000/recipes/";
 const URI2 = "http://localhost:8000/users/recipes";
 
 const CompShowRecipeDetails = () => {
-
+    // Obtiene el ID de la receta de los parámetros de la URL.
     const {id} = useParams();
+
+    // Estados para almacenar los detalles de la receta.
     const [id_receta, setIdReceta] = useState('');
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
@@ -17,20 +19,20 @@ const CompShowRecipeDetails = () => {
     const [instrucciones, setInstrucciones] = useState('');
     const [informacion_nutricional, setInformacion] = useState('');
     const [ingredientes, setIngredientes] = useState('');
+
+    // Contexto de autenticación y hook para la navegación.
     const { authState } = useAuth();
     const navigate = useNavigate();
-    const userId = localStorage.getItem('userId');
-    const URI3 = "http://localhost:8000/users/"+userId+"/recipes/"+id_receta;
-    const [checkRecipe, setCheckRecipe] = useState(false);
 
-    //Obtener Receta por ID
-    useEffect( ()=>{
+    // Verifica la autenticación y, si es necesario, redirige al usuario.
+    useEffect(() => {
         if (!authState.isAuthenticated) {
             navigate('/');
             return;
-        }else{
+        } else {
+            // Llamada a la API para obtener los detalles de la receta.
             const getRecipeById = async () => {
-                const res = await axios.get(URI+id);
+                const res = await axios.get(URI + id);
                 setIdReceta(res.data.id);
                 setNombre(res.data.nombre_receta);
                 setDescripcion(res.data.descripcion_receta);
@@ -42,18 +44,24 @@ const CompShowRecipeDetails = () => {
     
             getRecipeById();
         }
-    },[id, authState.isAuthenticated, navigate])
+    }, [id, authState.isAuthenticated, navigate]);
+
+    // Estados y lógica para manejar la funcionalidad de favoritos.
+    const userId = localStorage.getItem('userId');
+    const URI3 = "http://localhost:8000/users/" + userId + "/recipes/" + id_receta;
+    const [checkRecipe, setCheckRecipe] = useState(false);
 
     useEffect(() => {
         const checkUserRecipe = async () => {
             const res = await axios.get(URI3);
-            if(res.data.success){
+            if (res.data.success) {
                 setCheckRecipe(true);
             }
         }
         checkUserRecipe();
-    },[URI3])
+    }, [URI3]);
 
+    // Función para añadir la receta a favoritos.
     const añadirFavoritos = async () => {
         const data = {
             id_usuario: userId,
@@ -63,6 +71,7 @@ const CompShowRecipeDetails = () => {
         window.location.reload();
     }
 
+    // Función para eliminar la receta de favoritos.
     const eliminarFavorito = async () => {
         await axios.delete(URI3);
         window.location.reload();
@@ -102,7 +111,7 @@ const CompShowRecipeDetails = () => {
                     </div>
                 </div>
                 {
-                    checkRecipe ? <button className="btn btn-danger" onClick={()=>eliminarFavorito()}>Quitar de favoritos</button> : <button className="btn btn-primary" onClick={()=>añadirFavoritos()}>Añadir a favoritos</button>
+                    checkRecipe ? <button className="btn btn-danger" onClick={()=>eliminarFavorito()}>Quitar de favoritos</button> : <button className="btn btn-primary" onClick={()=>añadirFavoritos()}>Guardar</button>
                 }
             </div>
         </div>

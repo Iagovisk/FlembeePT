@@ -12,6 +12,14 @@ export const AuthProvider = ({ children }) => {
         administrador: localStorage.getItem('administrador')
     });
 
+    /**
+     * Función para manejar el inicio de sesión del usuario.
+     * Establece el token, userId, y estado de administrador en el localStorage y actualiza el estado de authState.
+     * 
+     * @param {string} token - Token de autenticación del usuario.
+     * @param {string} userId - ID del usuario.
+     * @param {string} administrador - Estado del usuario como administrador.
+     */
     const login = (token, userId, administrador) => {
         localStorage.setItem('token', token);
         localStorage.setItem('userId', userId);
@@ -24,6 +32,10 @@ export const AuthProvider = ({ children }) => {
         });
     };
 
+    /**
+     * Función para manejar el cierre de sesión del usuario.
+     * Elimina el token, userId y estado de administrador del localStorage y actualiza el estado de authState.
+     */
     const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('userId');

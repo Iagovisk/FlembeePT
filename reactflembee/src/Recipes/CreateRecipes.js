@@ -9,55 +9,66 @@ const URI = "http://localhost:8000/recipes/";
 const URI2 = "http://localhost:8000/categories/";
 
 const CompCreateRecipes = () => {
-    
-        const [nombre, setNombre] = useState('');
-        const [descripcion, setDescripcion] = useState('');
-        const [tiempo, setTiempo] = useState('');
-        const [instrucciones, setInstrucciones] = useState('');
-        const [informacion, setInformacion] = useState('');
-        const [categorias, setCategoria] = useState([]);
-        const [selectedCategoria, setSelectedCategoria] = useState('');
-        const [mostrarSelect, setMostrarSelect] = useState(true);
-        const [categoriaInput, setCategoriaInput] = useState('');
-        const [descripcionCategoria, setDescripcionCategoria] = useState('');
-        const [ingredientes, setIngredientes] = useState('');
-        const navigate = useNavigate();
-        const { authState } = useAuth();
+    // Estados para almacenar los valores de los campos del formulario.
+    const [nombre, setNombre] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+    const [tiempo, setTiempo] = useState('');
+    const [instrucciones, setInstrucciones] = useState('');
+    const [informacion, setInformacion] = useState('');
+    const [categorias, setCategoria] = useState([]);
+    const [selectedCategoria, setSelectedCategoria] = useState('');
+    const [mostrarSelect, setMostrarSelect] = useState(true);
+    const [categoriaInput, setCategoriaInput] = useState('');
+    const [descripcionCategoria, setDescripcionCategoria] = useState('');
+    const [ingredientes, setIngredientes] = useState('');
 
-        useEffect(() => {
-            if (!authState.isAuthenticated) {
-                navigate('/');
-                return;
-            }
-        }, [authState.isAuthenticated, navigate]);
+    // Hook para la navegación y contexto de autenticación.
+    const navigate = useNavigate();
+    const { authState } = useAuth();
 
-        useEffect( ()=>{
-            getCategories()
-        },[])
-
-        //Obtener Categorias
-        const getCategories = async () => {
-            const res = await axios.get(URI2);
-            setCategoria(res.data);
+    // Efectos para redirigir al usuario en caso de no tener autorización.
+    useEffect(() => {
+        if (authState.administrador === '0') {
+            navigate('/');
+            return;
         }
+    }, [authState.administrador, navigate, authState]);
 
-    
-        //Guardar Receta
-    
-        const store = async (e) => {
-            e.preventDefault();
+    useEffect(() => {
+        if (!authState.isAuthenticated) {
+            navigate('/');
+            return;
+        }
+    }, [authState.isAuthenticated, navigate]);
 
-            const recipe = {
-                nombre_receta: nombre,
-                descripcion_receta: descripcion,
-                ingredientes: ingredientes,
-                tiempo_preparacion: tiempo,
-                intrucciones: instrucciones,
-                informacion_nutricional: informacion,
-                id_categoria: selectedCategoria 
-            }
+    // Función para obtener categorías de la API.
+    const getCategories = async () => {
+        const res = await axios.get(URI2);
+        setCategoria(res.data);
+    }
 
-            if(!mostrarSelect){
+    // Efecto para cargar categorías al montar el componente.
+    useEffect(() => {
+        getCategories();
+    }, []);
+
+    // Función para manejar el envío del formulario.
+    const store = async (e) => {
+        e.preventDefault();
+
+        // Creación del objeto receta.
+        const recipe = {
+            nombre_receta: nombre,
+            descripcion_receta: descripcion,
+            ingredientes: ingredientes,
+            tiempo_preparacion: tiempo,
+            intrucciones: instrucciones,
+            informacion_nutricional: informacion,
+            id_categoria: selectedCategoria 
+        };
+
+        // Lógica para guardar la receta o crear una nueva categoría.
+        if(!mostrarSelect){
                 const categoria = {
                     nombre_categoria: categoriaInput,
                     descripcion_categoria: descripcionCategoria
@@ -115,11 +126,12 @@ const CompCreateRecipes = () => {
                     })
                 }
             }
-        }
+    };
 
-        const añadirCategoria = async () => {
-            setMostrarSelect(false);
-        }
+    // Función para activar la creación de una nueva categoría.
+    const añadirCategoria = async () => {
+        setMostrarSelect(false);
+    };
 
     return(
         <div className="backgroundCreateRecipe">
@@ -179,7 +191,6 @@ const CompCreateRecipes = () => {
         </div>
     
     )
-
 }
 
 export default CompCreateRecipes;

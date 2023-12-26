@@ -7,44 +7,53 @@ import './SignupCss/Signup.css';
 const URI = "http://localhost:8000/users/";
 
 const CompShowSignup = () => {
-
+    // Estados para almacenar los valores de los campos del formulario.
     const [alias, setAlias] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    // Hook para la navegación.
     const navigate = useNavigate();
 
-    //Guardar Usuario
-
+    // Objeto usuario con los datos ingresados en el formulario.
     const user = {
         alias: alias,
         email: email,
         contraseña: password
     }
 
+    // Función para manejar el envío del formulario.
     const store = async (e) => {
         e.preventDefault();
-        const result = await axios.post(URI, user);
-        if(!result.data.success){
-            return swal.fire({
-                title: 'Error!',
-                text: result.data.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            })
-        }else{
-            return swal.fire({
-                title: 'Exito!',
-                text: result.data.message,
-                icon: 'success',
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    navigate('/users');
-                }
-            })
+        try {
+            // Llamada a la API para registrar el usuario.
+            const result = await axios.post(URI, user);
+            if(!result.data.success){
+                // Mostrar mensaje de error si la creación del usuario falla.
+                swal.fire({
+                    title: 'Error!',
+                    text: result.data.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                })
+            } else {
+                // Mostrar mensaje de éxito y redirigir al usuario.
+                swal.fire({
+                    title: 'Exito!',
+                    text: result.data.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate('/users');
+                    }
+                })
+            }
+        } catch (error) {
+            // Manejar cualquier otro error.
+            alert(error);
         }
     }
-
 
     return(
         <div className="background">

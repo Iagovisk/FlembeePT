@@ -9,10 +9,20 @@ const URI = "http://localhost:8000/recipes/";
 
 const CompShowRecipes = () => {
 
+    // Hook para la navegación y contexto de autenticación.
     const [recipes, setRecipes] = useState([]);
     const { authState } = useAuth();
     const navigate = useNavigate();
 
+    // Efectos para redirigir al usuario en caso de no tener autorización.
+    useEffect(() => {
+        if (authState.administrador === '0') {
+            navigate('/');
+            return;
+        }
+    }, [authState.administrador, navigate, authState]);
+
+    // Efectos para redirigir al usuario en caso de no estar autenticado.
     useEffect(() => {
         if (!authState.isAuthenticated) {
             navigate('/');
@@ -20,11 +30,12 @@ const CompShowRecipes = () => {
         }
     }, [authState.isAuthenticated, navigate]);
 
+    //Obtener Recetas al cargar la pagina
     useEffect( ()=>{
         getRecipes()
     },[])
 
-    //Obtener Recetas
+    //Funcion para obtener recetas de la API
     const getRecipes = async () => {
         const res = await axios.get(URI);
         setRecipes(res.data);

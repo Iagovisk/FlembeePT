@@ -34,12 +34,3 @@ Recipe App es una aplicación interactiva que permite a los usuarios buscar, ver
 - Backend: NodeJs, ExpressJs.
 - Base de Datos: MySQL.
 
-## Autores
-- [Nombre del Autor]
-
-## Licencia
-Este proyecto está bajo la Licencia XYZ - Ver el archivo [LICENSE.md](LICENSE.md) para detalles.
-
-## Contacto
-Para más información, contáctanos en: flembee.technologies@gmail.com
-
